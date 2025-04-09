@@ -1,9 +1,7 @@
-import { useState } from 'react';
-import { Box, Typography, CircularProgress, Link } from '@mui/material';
-import DownloadIcon from '@mui/icons-material/Download';
-import { ProcessedDocument } from '@/types';
-import { Card } from '@/components/UI/Card';
+import { Box, Typography, CircularProgress } from '@mui/material';
 import { Button } from '@/components/UI/Button';
+import { Card } from '@/components/UI/Card';
+import { ProcessedDocument } from '@/types';
 
 interface DocumentProcessorProps {
   isProcessing: boolean;
@@ -64,12 +62,19 @@ export const DocumentProcessor = ({
                   </Typography>
                 </Box>
                 <Button
-                  component={Link}
                   href={doc.url}
-                  download={doc.fileName}
-                  startIcon={<DownloadIcon />}
                   variant="outlined"
                   size="small"
+                  onClick={(e) => {
+                    // Create a temporary link element to trigger download
+                    const link = document.createElement('a');
+                    link.href = doc.url;
+                    link.download = doc.fileName;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    e.preventDefault();
+                  }}
                 >
                   Download
                 </Button>

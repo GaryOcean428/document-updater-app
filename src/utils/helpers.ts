@@ -1,5 +1,4 @@
 import { v4 as uuidv4 } from 'uuid';
-import { Document, FindReplaceInstruction, ProcessedDocument } from '@/types';
 
 /**
  * Generate a unique ID for documents and instructions
@@ -57,7 +56,7 @@ export const isPdfDocument = (file: File): boolean => {
 /**
  * Create a download URL for a processed document
  */
-export const createDownloadLink = (blob: Blob, fileName: string): string => {
+export const createDownloadLink = (blob: Blob): string => {
   const url = URL.createObjectURL(blob);
   return url;
 };

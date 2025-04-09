@@ -1,8 +1,8 @@
 import { useCallback, useState } from 'react';
 import { Box, Typography, IconButton, CircularProgress } from '@mui/material';
-import { useDropzone } from 'react-dropzone';
 import DeleteIcon from '@mui/icons-material/Delete';
 import DescriptionIcon from '@mui/icons-material/Description';
+import { useDropzone } from 'react-dropzone';
 import { Document } from '@/types';
 import { formatFileSize, isValidDocumentType, isPdfDocument, isWordDocument } from '@/utils/helpers';
 import { Card } from '@/components/UI/Card';

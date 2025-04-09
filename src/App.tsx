@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Box, Grid, useMediaQuery, useTheme, Alert } from '@mui/material';
+import { Box, Grid as MuiGrid, Alert } from '@mui/material';
 import { Layout } from '@/components/Layout/Layout';
 import { FileUpload } from '@/components/FileUpload/FileUpload';
 import { ContentInstructions } from '@/components/ContentInstructions/ContentInstructions';
@@ -9,13 +9,15 @@ import { Document, FindReplaceInstruction, ProcessedDocument } from '@/types';
 import { generateId } from '@/utils/helpers';
 import { DocumentProcessorService } from '@/services/DocumentProcessorService';
 
+// Create a Grid Item component
+const GridItem = (props: any) => {
+  return <MuiGrid item {...props} />;
+};
+
 /**
  * Main App component that integrates all the pieces together
  */
 function App() {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-  
   // State for documents
   const [originalDocument, setOriginalDocument] = useState<Document | null>(null);
   const [sampleDocument, setSampleDocument] = useState<Document | null>(null);
@@ -150,9 +152,9 @@ function App() {
           This application processes documents entirely in your browser. Your files are never uploaded to a server.
         </Alert>
         
-        <Grid container spacing={3}>
+        <MuiGrid container spacing={3}>
           {/* File Upload Section */}
-          <Grid item xs={12} md={6}>
+          <GridItem xs={12} md={6}>
             <FileUpload
               type="original"
               document={originalDocument}
@@ -160,9 +162,9 @@ function App() {
               title="Original Document"
               description="Upload the document you want to update (PDF or Word)."
             />
-          </Grid>
+          </GridItem>
           
-          <Grid item xs={12} md={6}>
+          <GridItem xs={12} md={6}>
             <FileUpload
               type="sample"
               document={sampleDocument}
@@ -171,28 +173,28 @@ function App() {
               description="Upload a Word document (.docx) with the styling you want to apply."
               acceptedFileTypes={['.docx']}
             />
-          </Grid>
+          </GridItem>
           
           {/* Content Instructions Section */}
-          <Grid item xs={12}>
+          <GridItem xs={12}>
             <ContentInstructions
               instructions={instructions}
               onAddInstruction={handleAddInstruction}
               onUpdateInstruction={handleUpdateInstruction}
               onRemoveInstruction={handleRemoveInstruction}
             />
-          </Grid>
+          </GridItem>
           
           {/* Document Processor Section */}
-          <Grid item xs={12}>
+          <GridItem xs={12}>
             <DocumentProcessor
               isProcessing={isProcessing}
               processedDocuments={processedDocuments}
               onProcess={handleProcess}
               canProcess={canProcess}
             />
-          </Grid>
-        </Grid>
+          </GridItem>
+        </MuiGrid>
       </Box>
       
       {/* Notification */}

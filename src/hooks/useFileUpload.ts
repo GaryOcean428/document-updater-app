@@ -1,7 +1,7 @@
-import { useState, useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { Document } from '@/types';
-import { generateId, isValidDocumentType, formatFileSize } from '@/utils/helpers';
+import { generateId, isValidDocumentType } from '@/utils/helpers';
 
 interface UseFileUploadProps {
   type: 'original' | 'sample';
